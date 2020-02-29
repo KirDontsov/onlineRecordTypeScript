@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 10000,
+  "expoServerNgrokUrl": "https://zn-umu.kir-dontsov.onlinerecordtypescript.exp.direct",
+  "packagerNgrokUrl": "https://packager.zn-umu.kir-dontsov.onlinerecordtypescript.exp.direct",
+  "ngrokPid": 12336,
+  "webpackServerPort": 19006
+}
