@@ -2,7 +2,12 @@ import React from "react";
 import { Text, StyleSheet } from "react-native";
 import { blackColor } from "./Vars";
 
-const AppTextTitle = props => {
+export interface IProps {
+  style?: object;
+  children: string | object;
+}
+
+const AppTextTitle = (props: IProps) => {
   return (
     <Text style={{ ...styles.default, ...props.style }}>{props.children}</Text>
   );

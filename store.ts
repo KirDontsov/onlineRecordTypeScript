@@ -1,14 +1,10 @@
-import selectPlugin from "@rematch/select";
-import { init } from "@rematch/core";
-
-import * as models from "./z_models";
-
-export { models };
-export type models = typeof models;
+import { init, RematchRootState, RematchDispatch } from "@rematch/core";
+import { models, RootModel } from "./z_models";
 
 export const store = init({
-  plugins: [selectPlugin()],
   models
 });
 
-export const { select } = store;
+export type Store = typeof store;
+export type Dispatch = RematchDispatch<RootModel>;
+export type iRootState = RematchRootState<RootModel>;

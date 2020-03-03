@@ -1,50 +1,45 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-  KeyboardAvoidingView
-} from "react-native";
+import { iRootState, Dispatch } from "../store";
+import { View, StyleSheet, Dimensions, FlatList } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { activeColor } from "../z_components/ui/Vars";
 import Loader from "../z_components/ui/Loader";
 import SearchInput, { createFilter } from "react-native-search-filter";
-import { RematchDispatch, RematchRootState } from "@rematch/core";
-import { models } from "../store";
 
 const KEYS_TO_FILTERS = ["city", "id"];
 
-class Cities extends Component {
+interface CitiesProps
+  extends Partial<ReturnType<typeof mapState>>,
+    Partial<ReturnType<typeof mapDispatch>> {
+  navigation?: any;
+  searchTerm?: string;
+  city?: string;
+  data?: any;
+  id?: string | number;
+}
+
+class Cities extends Component<CitiesProps> {
   state = {
     searchTerm: ""
   };
-  fetchCities = async () => {
-    const res = await axios.get("http://book-service.tw1.su/city.json");
-    this.props.getCities(res.data);
-    this.props.setIsReady(true);
-  };
   componentDidMount() {
-    this.fetchCities();
+    this.props.fetchCities();
   }
 
-  continue = item => {
-    this.props.setCity(item.city);
+  continue = (item: any) => {
+    this.props.chooseCity(item.city);
     this.props.navigation.navigate("Map");
   };
 
-  searchUpdated(term) {
+  searchUpdated(term: string) {
     this.setState({ searchTerm: term });
   }
 
   render() {
     let fliteredData = this.props.cities;
 
-    console.log(this.props.cities);
-    // if (this.props.cities !== undefined && this.props.cities.length() !== 0)
-    if (this.props.isReady) {
+    if (this.props.isReadyCities) {
       fliteredData = fliteredData.filter(
         createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
       );
@@ -59,8 +54,9 @@ class Cities extends Component {
           style={styles.searchInput}
           placeholder="Type a message to search"
         />
-        {this.props.isReady ? (
-          <FlatList
+
+        {this.props.isReadyCities ? (
+          <FlatList<any>
             style={[styles.container]}
             data={fliteredData}
             renderItem={({ item }) => {
@@ -71,7 +67,7 @@ class Cities extends Component {
                     style={[styles.listItem]}
                     iconStyle={styles.icon}
                     color={"#000"}
-                    onPress={item => this.continue(item)}
+                    onPress={() => this.continue(item)}
                   >
                     {item.city}
                   </FontAwesome.Button>
@@ -92,9 +88,9 @@ class Cities extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
-    // width: Dimensions.get("window").width,
-    // height: Dimensions.get("window").height
+    backgroundColor: "#fff",
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
   },
   searchInput: {
     padding: 10,
@@ -135,18 +131,30 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapState = (state: RematchRootState<models>) => ({
-  textInput: state.city.textInput,
+const mapState = (state: iRootState) => ({
   cities: state.city.cities,
-  chosenCity: state.city.chosenCity,
-  isReadyCity: state.city.isReadyCity
+  isReadyCities: state.city.isReadyCities,
+  chosenCity: state.city.chosenCity
 });
 
-const mapDispatch = (dispatch: RematchDispatch<models>) => ({
-  setTextInput: () => dispatch.city.setTextInput(),
-  getCities: () => dispatch.city.getCities(),
-  setCity: () => dispatch.city.setCity(),
-  setIsReady: () => dispatch.city.setIsReady()
+const mapDispatch = (dispatch: Dispatch) => ({
+  fetchCities: dispatch.city.fetchCities,
+  chooseCity: dispatch.city.chooseCity
 });
+
+// const mapState = (state: RematchRootState<models>) => ({
+//   textInput: state.city.textInput,
+//   cities: state.city.cities,
+//   chosenCity: state.city.chosenCity,
+//   isReadyCity: state.city.isReadyCity
+// });
+
+// const mapDispatch = (dispatch: RematchDispatch<models>) => ({
+//   fetchCities: () => dispatch.city.fetchCities()
+//   // setTextInput: () => dispatch.city.setTextInput(),
+//   // getCities: () => dispatch.city.getCities(),
+//   // setCity: () => dispatch.city.setCity(item.city),
+//   // setIsReady: () => dispatch.city.setIsReady(true)
+// });
 
 export default connect(mapState as any, mapDispatch as any)(Cities);

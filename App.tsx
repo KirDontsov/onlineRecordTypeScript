@@ -16,14 +16,6 @@ import { Provider } from "react-redux";
 import { AppLoading } from "expo";
 import { BlurView } from "expo-blur";
 
-interface HomeStackParamList {
-  Home: undefined;
-}
-
-interface HomeStackParamList {
-  Profil: undefined;
-}
-
 // const statusBarHeight = () => getStatusBarHeight();
 
 // if (Platform.OS === "android" && statusBarHeight >= 24) {
@@ -43,7 +35,12 @@ interface HomeStackParamList {
 //   TimeScreen
 // } from "./screens";
 
-import { HomeScreen, ProfileScreen } from "./z_screens";
+import {
+  HomeScreen,
+  MapScreen,
+  ProfileScreen,
+  RecordScreen
+} from "./z_screens";
 
 // config
 const config = {
@@ -80,7 +77,7 @@ function HomeStackScreen() {
           title: "Выберите город"
         }}
       />
-      {/* <HomeStack.Screen
+      <HomeStack.Screen
         name="Map"
         component={MapScreen}
         options={{
@@ -95,7 +92,7 @@ function HomeStackScreen() {
           title: "Запись"
         }}
       />
-      <HomeStack.Screen
+      {/*<HomeStack.Screen
         name="FirstScreen"
         component={FirstScreen}
         options={{

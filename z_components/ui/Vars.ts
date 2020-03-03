@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import { IContainer } from "../../@types/Interfaces";
 
 export const activeColor = "#613EEA";
 
@@ -14,7 +15,7 @@ export const windowWidth = Dimensions.get("window").width;
 
 export const windowHeight = Dimensions.get("window").height;
 
-export const container = {
+export const container: IContainer = {
   flex: 1,
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height,

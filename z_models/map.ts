@@ -1,6 +1,13 @@
-import { createModel } from "@rematch/core";
+import { Dispatch } from "../store";
+import axios from "axios";
 
-interface MyState {
+export interface MapState {
+  state: IState;
+  reducers: object;
+  effects?: () => void;
+}
+
+interface IState {
   filials: string;
   chosenFilial: string;
   isReadyMap: boolean;
@@ -16,11 +23,11 @@ interface MyState {
   };
 }
 
-export const map = createModel<MyState>({
+export const map = {
   state: {
     filials: "",
     chosenFilial: "",
-    isReady: false,
+    isReadyMap: false,
     region: {
       latitude: 44.5622,
       longitude: 38.0848,
@@ -33,17 +40,24 @@ export const map = createModel<MyState>({
     }
   },
   reducers: {
-    getFilials: (state: MyState, payload: string) => ({
+    getFilials: (state: MapState, payload: string) => ({
       ...state,
       filials: payload
     }),
-    setFilial: (state: MyState, payload: string) => ({
+    setFilial: (state: MapState, payload: string) => ({
       ...state,
       chosenFilial: payload
     }),
-    setIsReady: (state: MyState, payload: boolean) => ({
+    setIsReadyMap: (state: MapState, payload: boolean) => ({
       ...state,
-      isReady: payload
+      isReadyMap: payload
     })
-  }
-});
+  },
+  effects: (dispatch: Dispatch) => ({
+    async fetchCities() {
+      const res = await axios.get("http://book-service.tw1.su/city.json");
+      dispatch.map.getFilials(res.data);
+      dispatch.map.setIsReadyMap(true);
+    }
+  })
+};

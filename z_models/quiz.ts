@@ -1,6 +1,10 @@
-import { createModel } from "@rematch/core";
+export interface QuizState {
+  state: IState;
+  reducers: object;
+  effects?: () => void;
+}
 
-interface MyState {
+interface IState {
   step: number;
   item: string;
   specialists: string;
@@ -11,7 +15,7 @@ interface MyState {
   isReadyQuiz: boolean;
 }
 
-export const quiz = createModel<MyState>({
+export const quiz = {
   state: {
     step: 0,
     item: "",
@@ -23,37 +27,37 @@ export const quiz = createModel<MyState>({
     isReady: false
   },
   reducers: {
-    setStep: (state: MyState, payload: number) => ({
+    setStep: (state: QuizState, payload: number) => ({
       ...state,
       step: payload
     }),
-    setItem: (state: MyState, payload: string) => ({
+    setItem: (state: QuizState, payload: string) => ({
       ...state,
       item: payload
     }),
-    setSpecialists: (state: MyState, payload: string) => ({
+    setSpecialists: (state: QuizState, payload: string) => ({
       ...state,
       specialists: payload
     }),
-    getChosenSpecialist: (state: MyState, payload: string) => ({
+    getChosenSpecialist: (state: QuizState, payload: string) => ({
       ...state,
       chosenSpecialist: payload
     }),
-    setService: (state: MyState, payload: string) => ({
+    setService: (state: QuizState, payload: string) => ({
       ...state,
       service: payload
     }),
-    setDate: (state: MyState, payload: string) => ({
+    setDate: (state: QuizState, payload: string) => ({
       ...state,
       date: payload
     }),
-    setTime: (state: MyState, payload: string) => ({
+    setTime: (state: QuizState, payload: string) => ({
       ...state,
       time: payload
     }),
-    setIsReady: (state: MyState, payload: boolean) => ({
+    setIsReady: (state: QuizState, payload: boolean) => ({
       ...state,
       isReadyQuiz: payload
     })
   }
-});
+};

@@ -1,35 +1,40 @@
-import { createModel } from "@rematch/core";
+import { Dispatch } from "../store";
+import axios from "axios";
 
-interface MyState {
-  textInput: string;
-  cities: string;
-  chosenCity: string;
-  isReadyCity: boolean;
+interface CityState {
+  cities: Array<CitiesType>;
+}
+interface CitiesType {
+  id?: string | number;
+  city?: string;
+  region?: string;
 }
 
-export const city = createModel<MyState>({
+export const city = {
   state: {
-    textInput: "",
-    cities: "",
-    chosenCity: "",
-    isReadyCity: false
+    cities: new Array(),
+    isReadyCities: false,
+    chosenCity: ""
   },
   reducers: {
-    setTextInput: (state: MyState, payload: string) => ({
-      ...state,
-      textInput: payload
-    }),
-    getCities: (state: MyState, payload: string) => ({
+    getCities: (state: CityState, payload: any[]) => ({
       ...state,
       cities: payload
     }),
-    setCity: (state: MyState, payload: string) => ({
+    setReadyCities: (state: CityState, payload: boolean) => ({
+      ...state,
+      isReadyCities: payload
+    }),
+    chooseCity: (state: CityState, payload: string) => ({
       ...state,
       chosenCity: payload
-    }),
-    setIsReady: (state: MyState, payload: boolean) => ({
-      ...state,
-      isReadyCity: payload
     })
-  }
-});
+  },
+  effects: (dispatch: Dispatch) => ({
+    async fetchCities() {
+      const res = await axios.get("http://book-service.tw1.su/city.json");
+      dispatch.city.getCities(res.data);
+      dispatch.city.setReadyCities(true);
+    }
+  })
+};
