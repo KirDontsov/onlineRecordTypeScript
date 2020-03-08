@@ -6,7 +6,7 @@ export { default as MapScreen } from "./HomeStack/MapScreen";
 // export { default as NextScreenTwo } from "./NextScreenTwo";
 export { default as RecordScreen } from "./HomeStack/RecordStack/RecordScreen";
 // // quiz
-// export { default as FirstScreen } from "./quiz/FirstScreen";
-// export { default as SecondScreen } from "./quiz/SecondScreen";
-// export { default as ThirdScreen } from "./quiz/ThirdScreen";
-// export { default as TimeScreen } from "./quiz/TimeScreen";
+export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";
+// export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";
+// export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";
+// export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";
