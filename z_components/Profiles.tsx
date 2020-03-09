@@ -2,11 +2,24 @@ import React, { Component } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import { IProfile } from "../@types/Interfaces";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Feather as Icon } from "@expo/vector-icons";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Card from "./Card";
 import LightStatusBar from "./ui/StatusBar";
+import { connect } from "react-redux";
+import { iRootState, Dispatch } from "../store";
+
+interface ISpecialistsProps extends Partial<ReturnType<typeof mapState>>, Partial<ReturnType<typeof mapDispatch>> {
+	navigation?: any;
+	profiles: IProfile[];
+	// city?: string;
+	// data?: any;
+	// id?: string | number;
+}
+
+export interface IProfilesState {
+	profiles: IProfile[];
+}
 
 function runSpring(clock: Animated.Clock, value: any, dest: number | Animated.Node<number>) {
 	const state = {
@@ -66,15 +79,7 @@ const {
 	Extrapolate
 } = Animated;
 
-export interface IProfilesProps {
-	profiles: IProfile[];
-	navigation: any;
-}
-export interface IProfilesState {
-	profiles: IProfile[];
-}
-
-class Profiles extends Component<IProfilesProps, IProfilesState> {
+class Profiles extends Component<ISpecialistsProps, IProfilesState> {
 	translationX: Animated.Value<0>;
 	translationY: Animated.Value<0>;
 	velocityX: Animated.Value<0>;
@@ -84,7 +89,7 @@ class Profiles extends Component<IProfilesProps, IProfilesState> {
 	onGestureEvent: (...args: any[]) => void;
 	translateY: Animated.Node<any>;
 	translateX: Animated.Node<any>;
-	constructor(props: IProfilesProps) {
+	constructor(props: ISpecialistsProps) {
 		super(props);
 		const { profiles } = props;
 		this.state = { profiles };
@@ -150,9 +155,9 @@ class Profiles extends Component<IProfilesProps, IProfilesState> {
 		// console.log({ likes: translationX > 0 });
 		if (translationX > 0) {
 			setTimeout(() => {
+				this.props.setChosenSpecialist(lastProfile.id);
 				this.props.navigation.navigate("Record");
 			}, 100);
-			// this.props.navigation.navigate("Record");
 		}
 		const {
 			profiles: [lastProfile, ...profiles]
@@ -186,7 +191,7 @@ class Profiles extends Component<IProfilesProps, IProfilesState> {
 			zIndex: 900,
 			transform: [{ translateX }, { translateY }, { rotateZ }]
 		};
-		console.log(lastProfile);
+		// console.log(this.props.specialists);
 		return (
 			<SafeAreaView style={styles.container}>
 				<LightStatusBar />
@@ -198,14 +203,6 @@ class Profiles extends Component<IProfilesProps, IProfilesState> {
 						</Animated.View>
 					</PanGestureHandler>
 				</View>
-				{/* <View style={styles.footer}>
-					<View style={styles.circle}>
-						<Icon name="x" size={32} color="#ec5288" />
-					</View>
-					<View style={styles.circle}>
-						<Icon name="heart" size={32} color="#6ee3b4" />
-					</View>
-				</View> */}
 			</SafeAreaView>
 		);
 	}
@@ -219,11 +216,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		margin: 8,
 		zIndex: 100
-	},
-	footer: {
-		flexDirection: "row",
-		justifyContent: "space-evenly",
-		padding: 16
 	},
 	circle: {
 		width: 64,
@@ -240,4 +232,17 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Profiles;
+const mapState = (state: iRootState) => ({
+	step: state.quiz.step,
+	specialists: state.quiz.specialists
+});
+
+const mapDispatch = (dispatch: Dispatch) => ({
+	fetchSpecialists: dispatch.quiz.fetchSpecialists,
+	setChosenSpecialist: dispatch.quiz.setChosenSpecialist
+});
+
+export default connect(
+	mapState as any,
+	mapDispatch as any
+)(Profiles);
