@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { iRootState, Dispatch } from "../store";
-import { View, StyleSheet, Dimensions, FlatList } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { activeColor } from "../z_components/ui/Vars";
-import Loader from "../z_components/ui/Loader";
+import { Text } from "react-native";
+import { iRootState, Dispatch } from "../../store";
+import { View, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import {
+  activeColor,
+  passiveColor,
+  lightColor,
+  windowWidth,
+  windowHeight
+} from "../ui/Vars";
+import Loader from "../ui/Loader";
 import SearchInput, { createFilter } from "react-native-search-filter";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const KEYS_TO_FILTERS = ["city", "id"];
 
@@ -55,31 +62,30 @@ class Cities extends Component<CitiesProps> {
           placeholder="Type a message to search"
         />
 
-        {this.props.isReadyCities ? (
-          <FlatList<any>
-            style={[styles.container]}
-            data={fliteredData}
-            renderItem={({ item }) => {
+        <View style={[styles.list]}>
+          {this.props.isReadyCities ? (
+            fliteredData.map((item, i) => {
               return (
-                <View>
-                  <FontAwesome.Button
+                <TouchableOpacity
+                  key={i}
+                  style={styles.listItem}
+                  onPress={() => this.continue(item)}
+                >
+                  <Icon
                     name="location-arrow"
-                    style={[styles.listItem]}
-                    iconStyle={styles.icon}
-                    color={"#000"}
-                    onPress={() => this.continue(item)}
-                  >
-                    {item.city}
-                  </FontAwesome.Button>
-                  <View style={[styles.listDivider]} />
-                </View>
+                    size={25}
+                    color="white"
+                    style={styles.icon}
+                  />
+                  <Text style={styles.cityTitle}>{item.city}</Text>
+                  <Text style={styles.text}>1 филиал</Text>
+                </TouchableOpacity>
               );
-            }}
-            keyExtractor={item => item.id}
-          />
-        ) : (
-          <Loader />
-        )}
+            })
+          ) : (
+            <Loader />
+          )}
+        </View>
       </View>
     );
   }
@@ -90,44 +96,59 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
+    height: Dimensions.get("window").height,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    marginTop: 400
   },
+  // flatList: {
+  //   flex: 1,
+  //   backgroundColor: "#fff",
+  //   width: Dimensions.get("window").width,
+  //   height: "100%"
+  // },
   searchInput: {
-    padding: 10,
-    borderColor: "#CCC",
-    borderWidth: 1
+    paddingVertical: 5,
+    paddingLeft: 25,
+    backgroundColor: passiveColor,
+    borderRadius: 50,
+    marginVertical: 30,
+    marginHorizontal: "10%",
+    width: "80%"
   },
   list: {
     flex: 1,
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
+    width: windowWidth,
+    height: windowHeight
   },
   listItem: {
     position: "relative",
-    flex: 1,
-    alignItems: "center",
+    // flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "center",
     zIndex: 1,
     fontSize: 40,
     fontFamily: "Montserrat",
     fontWeight: "700",
     color: "#000000",
     backgroundColor: "#fff",
-    paddingLeft: 50,
-    height: 50
+    paddingLeft: 80,
+    height: 60,
+    marginVertical: 2,
+    borderRadius: 0,
+    borderBottomColor: "#A4BFEB",
+    borderBottomWidth: 0.5
   },
   icon: {
     position: "absolute",
-    left: "5%",
+    left: "8%",
     color: activeColor
   },
-  listDivider: {
-    alignSelf: "center",
-    position: "absolute",
-    zIndex: 3,
-    bottom: 1,
-    borderBottomColor: "#A4BFEB",
-    borderBottomWidth: 0.5,
-    width: "90%"
+  cityTitle: {
+    fontWeight: "bold"
+  },
+  text: {
+    color: lightColor
   }
 });
 

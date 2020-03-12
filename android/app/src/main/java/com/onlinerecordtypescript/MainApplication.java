@@ -1,5 +1,6 @@
 package com.onlinerecordtypescript;
 
+
 import android.app.Application;
 
 import com.facebook.react.PackageList;
@@ -21,6 +22,9 @@ import expo.modules.filesystem.FileSystemPackage;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.airbnb.android.react.maps.MapsPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(
@@ -57,4 +61,13 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
+  
+  @Override
+    protected List<ReactPackage> getPackages() {
+        return Arrays.<ReactPackage>asList(
+                new MainReactPackage(),
+                new MapsPackage(),
+                new VectorIconsPackage()
+        );
+    }
 }

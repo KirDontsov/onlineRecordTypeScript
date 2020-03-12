@@ -1,15 +1,16 @@
 import { Dimensions } from "react-native";
 import { IContainer } from "../../@types/Interfaces";
+import Constants from "expo-constants";
 
-export const activeColor = "#613EEA";
+export const activeColor = "#325efb";
 
-export const passiveColor = "#E8E2FC";
+export const passiveColor = "#eef2f4";
 
-export const darkColor = "#463C6A";
+export const lightColor = "#9db3ff";
+
+export const darkColor = "#19243b";
 
 export const blackColor = "#171D33";
-
-export const greaterActiveColor = "#0038A8";
 
 export const windowWidth = Dimensions.get("window").width;
 
@@ -21,6 +22,13 @@ export const container: IContainer = {
   height: Dimensions.get("window").height,
   justifyContent: "center",
   backgroundColor: "#fff",
-  paddingTop: 100,
+  paddingTop: 82,
   paddingBottom: 100
 };
+
+const { height } = Dimensions.get("window");
+const φ = (1 + Math.sqrt(5)) / 2;
+
+export const MIN_HEADER_HEIGHT = 64 + Constants.statusBarHeight;
+export const MAX_HEADER_HEIGHT = height * (1 - 1 / φ);
+export const HEADER_DELTA = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;

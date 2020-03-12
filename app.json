@@ -1,17 +1,32 @@
 {
-  "name": "onlineRecordTypeScript",
-  "displayName": "onlineRecordTypeScript",
+  "name": "online-record",
+  "displayName": "online-record",
   "expo": {
-    "name": "onlineRecordTypeScript",
-    "slug": "onlineRecordTypeScript",
-    "privacy": "unlisted",
-    "sdkVersion": "36.0.0",
+    "name": "online-record",
+    "icon": "./z_assets/img/preloader.png",
     "version": "1.0.0",
+    "slug": "online_record",
+    "sdkVersion": "36.0.0",
     "entryPoint": "node_modules/expo/AppEntry.js",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ]
+    "platforms": ["ios", "android", "web"],
+    "orientation": "portrait",
+    "splash": {
+      "image": "./z_assets/img/preloader.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "ru.record.online",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "ru.record.online",
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDiKPA0WLW7EfCUee5xdRHbYurBNmrCsCs"
+        }
+      }
+    }
   }
 }

@@ -3,7 +3,7 @@ export const mapStyle = [
     elementType: "geometry",
     stylers: [
       {
-        color: "#212121"
+        color: "#f5f5f5"
       }
     ]
   },
@@ -19,7 +19,7 @@ export const mapStyle = [
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#757575"
+        color: "#616161"
       }
     ]
   },
@@ -27,34 +27,41 @@ export const mapStyle = [
     elementType: "labels.text.stroke",
     stylers: [
       {
-        color: "#212121"
+        color: "#f5f5f5"
       }
     ]
   },
   {
-    featureType: "administrative",
-    elementType: "geometry",
+    featureType: "administrative.land_parcel",
     stylers: [
       {
-        color: "#757575"
+        visibility: "off"
       }
     ]
   },
   {
-    featureType: "administrative.country",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#9e9e9e"
-      }
-    ]
-  },
-  {
-    featureType: "administrative.locality",
+    featureType: "administrative.land_parcel",
     elementType: "labels.text.fill",
     stylers: [
       {
         color: "#bdbdbd"
+      }
+    ]
+  },
+  {
+    featureType: "administrative.neighborhood",
+    stylers: [
+      {
+        visibility: "off"
+      }
+    ]
+  },
+  {
+    featureType: "poi",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#eeeeee"
       }
     ]
   },
@@ -72,7 +79,7 @@ export const mapStyle = [
     elementType: "geometry",
     stylers: [
       {
-        color: "#181818"
+        color: "#e5e5e5"
       }
     ]
   },
@@ -81,75 +88,30 @@ export const mapStyle = [
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#616161"
-      }
-    ]
-  },
-  {
-    featureType: "poi.park",
-    elementType: "labels.text.stroke",
-    stylers: [
-      {
-        color: "#1b1b1b"
+        color: "#9e9e9e"
       }
     ]
   },
   {
     featureType: "road",
-    elementType: "geometry.fill",
+    elementType: "geometry",
     stylers: [
       {
-        color: "#2c2c2c"
+        color: "#ffffff"
       }
     ]
   },
   {
     featureType: "road",
-    elementType: "labels.text.fill",
+    elementType: "labels",
     stylers: [
       {
-        color: "#8a8a8a"
+        visibility: "off"
       }
     ]
   },
   {
     featureType: "road.arterial",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#373737"
-      }
-    ]
-  },
-  {
-    featureType: "road.highway",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#3c3c3c"
-      }
-    ]
-  },
-  {
-    featureType: "road.highway.controlled_access",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#4e4e4e"
-      }
-    ]
-  },
-  {
-    featureType: "road.local",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#616161"
-      }
-    ]
-  },
-  {
-    featureType: "transit",
     elementType: "labels.text.fill",
     stylers: [
       {
@@ -158,11 +120,65 @@ export const mapStyle = [
     ]
   },
   {
+    featureType: "road.highway",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#dadada"
+      }
+    ]
+  },
+  {
+    featureType: "road.highway",
+    elementType: "labels.text.fill",
+    stylers: [
+      {
+        color: "#616161"
+      }
+    ]
+  },
+  {
+    featureType: "road.local",
+    elementType: "labels.text.fill",
+    stylers: [
+      {
+        color: "#9e9e9e"
+      }
+    ]
+  },
+  {
+    featureType: "transit.line",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#e5e5e5"
+      }
+    ]
+  },
+  {
+    featureType: "transit.station",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#eeeeee"
+      }
+    ]
+  },
+  {
     featureType: "water",
     elementType: "geometry",
     stylers: [
       {
-        color: "#000000"
+        color: "#c9c9c9"
+      }
+    ]
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text",
+    stylers: [
+      {
+        visibility: "off"
       }
     ]
   },
@@ -171,7 +187,7 @@ export const mapStyle = [
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#3d3d3d"
+        color: "#9e9e9e"
       }
     ]
   }

@@ -2,8 +2,9 @@ import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { activeColor, container } from "../ui/Vars";
+import { IStyles } from "../../@types/Interfaces";
 
-const Loader = props => (
+const Loader = () => (
   <View style={[styles.container]}>
     <ActivityIndicator
       // style={{
@@ -17,7 +18,7 @@ const Loader = props => (
   </View>
 );
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<IStyles>({
   container: { ...container }
 });
 

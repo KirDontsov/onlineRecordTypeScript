@@ -7,6 +7,6 @@ export { default as MapScreen } from "./HomeStack/MapScreen";
 export { default as RecordScreen } from "./HomeStack/RecordStack/RecordScreen";
 // // quiz
 export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";
-// export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";
-// export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";
+export { default as ServicesScreen } from "./HomeStack/RecordStack/ServicesScreen";
+export { default as CalendarScreen } from "./HomeStack/RecordStack/CalendarScreen";
 // export { default as SpecialistScreen } from "./HomeStack/RecordStack/SpecialistScreen";

@@ -1,13 +1,13 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, Platform } from "react-native";
 
 const LightStatusBar = () => {
   return (
     <StatusBar
-      barStyle="light-content"
+      translucent
+      barStyle={Platform.OS === "ios" ? "dark-content" : "light-content"}
       hidden={false}
-      backgroundColor="#ffffff"
-      translucent={true}
+      backgroundColor={Platform.OS === "ios" ? "#ffffff" : "rgba(0,0,0,0.2)"}
     />
   );
 };

@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 2660,
-  "expoServerNgrokUrl": "https://tp-xsz.anonymous.onlinerecordtypescript.exp.direct",
-  "packagerNgrokUrl": "https://packager.tp-xsz.anonymous.onlinerecordtypescript.exp.direct",
-  "ngrokPid": 8608
+  "packagerPid": 1476,
+  "expoServerNgrokUrl": "https://43-w6j.kir-dontsov.onlinerecordtypescript.exp.direct",
+  "packagerNgrokUrl": "https://packager.43-w6j.kir-dontsov.onlinerecordtypescript.exp.direct",
+  "ngrokPid": 9908,
+  "devToolsPort": 19002
 }
