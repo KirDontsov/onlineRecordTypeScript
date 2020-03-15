@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { IProfile } from "../../../@types/Interfaces";
 // import Loader from "../../../z_components/ui/Loader";
@@ -8,7 +8,7 @@ import HorizontalCalendarList from "../../../z_components/CalendarScreen/Horizon
 import { SafeAreaView } from "react-native-safe-area-context";
 import LightStatusBar from "../../../z_components/ui/StatusBar";
 import { LinearGradient } from "expo-linear-gradient";
-import { activeColor } from "../../../z_components/ui/Vars";
+import { activeColor, passiveColor } from "../../../z_components/ui/Vars";
 import Cover from "../../../z_components/ui/Cover";
 import Animated from "react-native-reanimated";
 
@@ -35,7 +35,7 @@ const SpecialistScreen: React.FC<ICalendarScreenProps> = ({ props }) => {
     <SafeAreaView style={styles.container}>
       <LightStatusBar />
       <LinearGradient
-        colors={[activeColor, "rgba(101,157,232,0.8)", "transparent"]}
+        colors={[activeColor, passiveColor]}
         style={styles.gradient}
       >
         <Cover {...{ y }} />

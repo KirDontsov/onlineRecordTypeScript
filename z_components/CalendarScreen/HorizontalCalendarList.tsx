@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
   calendar: {
     paddingTop: 70,
     height: windowHeight,
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
-    marginTop: 200
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    marginTop: 300
   }
 });

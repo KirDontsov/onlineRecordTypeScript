@@ -7,7 +7,7 @@ const LightStatusBar = () => {
       translucent
       barStyle={Platform.OS === "ios" ? "dark-content" : "light-content"}
       hidden={false}
-      backgroundColor={Platform.OS === "ios" ? "#ffffff" : "rgba(0,0,0,0.2)"}
+      backgroundColor={Platform.OS === "ios" ? "#ffffff" : "rgba(0,0,0,0.1)"}
     />
   );
 };

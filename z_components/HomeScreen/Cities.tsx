@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    marginTop: 400
+    marginTop: 300
   },
   // flatList: {
   //   flex: 1,

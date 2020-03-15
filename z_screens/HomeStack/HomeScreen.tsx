@@ -25,7 +25,7 @@ const HomeScreen: FunctionComponent<any> = props => {
       /> */}
       <LoadAssets {...{ assets }}>
         <LinearGradient
-          colors={[activeColor, "rgba(101,157,232,0.8)", "transparent"]}
+          colors={[activeColor, passiveColor]}
           style={styles.gradient}
         >
           <ScrollView>

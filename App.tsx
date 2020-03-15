@@ -38,11 +38,12 @@ import { BlurView } from "expo-blur";
 import {
   HomeScreen,
   MapScreen,
-  ProfileScreen,
   RecordScreen,
   SpecialistScreen,
   ServicesScreen,
-  CalendarScreen
+  CalendarScreen,
+  ProfileScreen,
+  SettingsScreen
 } from "./z_screens";
 
 // config
@@ -66,6 +67,7 @@ async function loadApp() {
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
+
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator
@@ -78,7 +80,9 @@ function HomeStackScreen() {
         component={HomeScreen}
         options={{
           title: "Выберите город",
-          headerTintColor: "#fff"
+          headerTintColor: "#fff",
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
       />
       <HomeStack.Screen
@@ -86,28 +90,36 @@ function HomeStackScreen() {
         component={MapScreen}
         options={{
           title: "Выберите филиал",
-          headerTintColor: activeColor
+          headerTintColor: activeColor,
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
       />
       <HomeStack.Screen
         name="Record"
         component={RecordScreen}
         options={{
-          title: "Запись"
+          title: "Запись",
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
       />
       <HomeStack.Screen
         name="SpecialistScreen"
         component={SpecialistScreen}
         options={{
-          title: "Выбор специалиста"
+          title: "Выбор специалиста",
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
       />
       <HomeStack.Screen
         name="ServicesScreen"
         component={ServicesScreen}
         options={{
-          title: "Выбор услуги"
+          title: "Выбор услуги",
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
       />
       <HomeStack.Screen
@@ -115,7 +127,9 @@ function HomeStackScreen() {
         component={CalendarScreen}
         options={{
           title: "Выбор дня",
-          headerTintColor: "#fff"
+          headerTintColor: "#fff",
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
       />
       {/*<HomeStack.Screen
@@ -139,17 +153,21 @@ function ProfileStackScreen() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          title: "Профиль"
+          title: "Профиль",
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
       />
-      {/* <ProfileStack.Screen
-        name="Record"
-        component={RecordScreen}
+      <ProfileStack.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={{
-          title: "Запись",
-          headerTintColor: activeColor
+          title: "Настройки",
+          headerTintColor: activeColor,
+          headerBackTitle: null,
+          headerTruncatedBackTitle: ""
         }}
-      /> */}
+      />
     </ProfileStack.Navigator>
   );
 }

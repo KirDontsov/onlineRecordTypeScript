@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Provider, configureFonts, DefaultTheme } from "react-native-paper";
-
 import App from "./App";
 
 const fontConfig = {
