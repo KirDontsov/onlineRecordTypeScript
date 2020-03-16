@@ -1,6 +1,6 @@
 {
   "urlRandomness": "2p-b68",
-  "hostType": "lan",
+  "hostType": "localhost",
   "lanType": "ip",
   "dev": true,
   "minify": false,

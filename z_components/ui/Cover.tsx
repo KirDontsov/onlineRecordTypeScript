@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import Animated from "react-native-reanimated";
 import { MAX_HEADER_HEIGHT, HEADER_DELTA } from "./Vars";
 
@@ -22,17 +22,22 @@ export default ({ y }: CoverProps) => {
   });
   return (
     <Animated.View style={[styles.container, { transform: [{ scale }] }]}>
-      <Image
+      <TouchableOpacity
+        onPress={() => console.log("clcik")}
         style={styles.image}
-        source={require("../../z_assets/img/ava.jpg")}
-      />
-      <Animated.View
+      >
+        <Image
+          style={styles.image}
+          source={require("../../z_assets/img/ava.jpg")}
+        />
+      </TouchableOpacity>
+      {/* <Animated.View
         style={{
           ...StyleSheet.absoluteFillObject,
           backgroundColor: "black",
           opacity
         }}
-      />
+      /> */}
     </Animated.View>
   );
 };

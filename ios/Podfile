@@ -43,4 +43,6 @@ target 'onlineRecordTypeScript' do
 
   # react-native-cli autolinking
   use_native_modules!
+  pod 'RNTouchThroughView', :path => '../node_modules/react-native-touch-through-view'
+
 end

@@ -5971,6 +5971,11 @@ react-native-shared-element@^0.5.6:
   resolved "https://registry.yarnpkg.com/react-native-shared-element/-/react-native-shared-element-0.5.6.tgz#f0efac19aac50d495cd4b8caedae758cb9752503"
   integrity sha512-4e3mFtrmqVHqmRum9xFTpY3JrteEP78oOIMM2I3ygu1sHcemYlyOq1BRoHk4vjHKzIckYuSXt8GAPYv1U5vosg==
 
+react-native-touch-through-view@^1.2.0-beta.0:
+  version "1.2.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-native-touch-through-view/-/react-native-touch-through-view-1.2.0-beta.0.tgz#9ee2332c1c1cc7cdb4e2a275f1b6f61e53ce51ec"
+  integrity sha512-hYVj37mJDp/83LwTckLhED5UiGvG14581SIk9tLs554anHqv+m+s9SWuHwHJp+H9LqwW6/8HC6UjeqNuoCmj5g==
+
 react-native-unimodules@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-native-unimodules/-/react-native-unimodules-0.7.0.tgz#ce4e48898c3ef0b986b87e7421303abf8afc862c"

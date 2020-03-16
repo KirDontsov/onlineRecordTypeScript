@@ -6,7 +6,8 @@ import {
   container,
   blackColor,
   whiteColor,
-  passiveColor
+  passiveColor,
+  lightColor
 } from "../ui/Vars";
 import { IStyles } from "../../@types/Interfaces";
 import { iRootState } from "../../store";
@@ -20,7 +21,7 @@ const Loader = (props: LoaderProps) => (
   <View style={props.darkTheme ? styles.containerDark : styles.containerLight}>
     <ActivityIndicator
       animating={true}
-      color={props.darkTheme ? activeColor : passiveColor}
+      color={props.darkTheme ? lightColor : activeColor}
       size={"large"}
     />
   </View>

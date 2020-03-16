@@ -23,18 +23,11 @@ interface ICalendarScreenProps
   navigation?: any;
   profiles: IProfile[];
   props: any;
+  onPress: () => void;
 }
 const { Value } = Animated;
 
 const SpecialistScreen = (props: ICalendarScreenProps): JSX.Element => {
-  // async componentDidMount() {
-  //   this.props.fetchSpecialists();
-  // }
-
-  // const { isReadySpecialists } = this.props;
-  // if (!isReadySpecialists) {
-  //   return <Loader />;
-  // }
   const y = new Value(0);
   return (
     <SafeAreaView

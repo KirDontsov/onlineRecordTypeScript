@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SafeAreaView from "react-native-safe-area-view";
 import LightStatusBar from "../../z_components/ui/StatusBar";
@@ -17,9 +17,18 @@ import LoadAssets from "../../z_components/HOC/LoadAssets";
 
 import { iRootState } from "../../store";
 import { connect } from "react-redux";
+import AppButton from "../../z_components/ui/AppButton";
+// import {
+//   TouchThroughView,
+//   TouchThroughWrapper
+// } from "react-native-touch-through-view";
 
 interface HomeScreenProps extends Partial<ReturnType<typeof mapState>> {
   navigation?: any;
+}
+
+interface Styles extends IStyles {
+  scrollWrapper: {};
 }
 
 const assets = [require("../../z_assets/img/bg4.jpg")];
@@ -30,10 +39,7 @@ const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       style={props.darkTheme ? styles.containerDark : styles.containerLight}
     >
       <LightStatusBar />
-      {/* <AppButton
-        title="Выбрать специалиста"
-        onPress={() => props.navigation.navigate("Record")}
-      /> */}
+
       <LoadAssets {...{ assets }}>
         <LinearGradient
           colors={
@@ -43,7 +49,21 @@ const HomeScreen = (props: HomeScreenProps): JSX.Element => {
           }
           style={styles.gradient}
         >
-          <ScrollView>
+          <View
+            style={{
+              flex: 2,
+              marginTop: 100,
+              backgroundColor: "transparent"
+            }}
+          >
+            <AppButton
+              style={{ zIndex: 0 }}
+              title="Записаться"
+              onPress={() => props.navigation.navigate("Record")}
+            />
+          </View>
+
+          <ScrollView style={{ zIndex: 2 }}>
             <Cities navigation={props.navigation} />
           </ScrollView>
         </LinearGradient>
@@ -52,7 +72,7 @@ const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   );
 };
 
-const styles = StyleSheet.create<IStyles>({
+const styles = StyleSheet.create<Styles>({
   containerLight: {
     ...container,
     paddingBottom: 0,
@@ -66,6 +86,9 @@ const styles = StyleSheet.create<IStyles>({
     backgroundColor: blackColor
   },
   gradient: {
+    flex: 1
+  },
+  scrollWrapper: {
     flex: 1
   }
 });
