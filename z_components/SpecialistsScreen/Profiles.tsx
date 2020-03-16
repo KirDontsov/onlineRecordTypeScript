@@ -1,25 +1,26 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Dimensions, SafeAreaView } from "react-native";
-import { IProfile } from "../../@types/Interfaces";
+import { IProfile, IStyles } from "../../@types/Interfaces";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Card from "./Card";
 import { connect } from "react-redux";
 import { iRootState, Dispatch } from "../../store";
-import LightStatusBar from "../ui/StatusBar";
+import { blackColor, container } from "../ui/Vars";
 
 interface ISpecialistsProps
   extends Partial<ReturnType<typeof mapState>>,
     Partial<ReturnType<typeof mapDispatch>> {
   navigation?: any;
   profiles: IProfile[];
-  // city?: string;
-  // data?: any;
-  // id?: string | number;
 }
 
 export interface IProfilesState {
   profiles: IProfile[];
+}
+
+interface Styles extends IStyles {
+  cards: {};
 }
 
 function runSpring(
@@ -220,8 +221,11 @@ class Profiles extends Component<ISpecialistsProps, IProfilesState> {
     };
     // console.log(this.props.specialists);
     return (
-      <SafeAreaView style={styles.container}>
-        <LightStatusBar />
+      <SafeAreaView
+        style={
+          this.props.darkTheme ? styles.containerDark : styles.containerLight
+        }
+      >
         <View style={styles.cards}>
           {profiles !== undefined
             ? profiles
@@ -244,33 +248,30 @@ class Profiles extends Component<ISpecialistsProps, IProfilesState> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
+const styles = StyleSheet.create<Styles>({
+  containerLight: {
+    ...container,
+    backgroundColor: "#fff",
+    paddingTop: 82,
+    paddingBottom: 0
+  },
+  containerDark: {
+    ...container,
+    backgroundColor: blackColor,
+    paddingTop: 82,
+    paddingBottom: 0
   },
   cards: {
     flex: 1,
     margin: 8,
     zIndex: 100
-  },
-  circle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    padding: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-    shadowColor: "gray",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.18,
-    shadowRadius: 2
   }
 });
 
 const mapState = (state: iRootState) => ({
   step: state.quiz.step,
-  specialists: state.quiz.specialists
+  specialists: state.quiz.specialists,
+  darkTheme: state.theme.darkTheme
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

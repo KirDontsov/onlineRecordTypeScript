@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import { IProfile } from "../../../@types/Interfaces";
+import { IProfile, IStyles } from "../../../@types/Interfaces";
 // import Loader from "../../../z_components/ui/Loader";
 import { connect } from "react-redux";
 import { iRootState, Dispatch } from "../../../store";
@@ -8,7 +8,12 @@ import HorizontalCalendarList from "../../../z_components/CalendarScreen/Horizon
 import { SafeAreaView } from "react-native-safe-area-context";
 import LightStatusBar from "../../../z_components/ui/StatusBar";
 import { LinearGradient } from "expo-linear-gradient";
-import { activeColor, passiveColor } from "../../../z_components/ui/Vars";
+import {
+  activeColor,
+  passiveColor,
+  container,
+  blackColor
+} from "../../../z_components/ui/Vars";
 import Cover from "../../../z_components/ui/Cover";
 import Animated from "react-native-reanimated";
 
@@ -21,7 +26,7 @@ interface ICalendarScreenProps
 }
 const { Value } = Animated;
 
-const SpecialistScreen: React.FC<ICalendarScreenProps> = ({ props }) => {
+const SpecialistScreen = (props: ICalendarScreenProps): JSX.Element => {
   // async componentDidMount() {
   //   this.props.fetchSpecialists();
   // }
@@ -32,24 +37,37 @@ const SpecialistScreen: React.FC<ICalendarScreenProps> = ({ props }) => {
   // }
   const y = new Value(0);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={props.darkTheme ? styles.containerDark : styles.containerLight}
+    >
       <LightStatusBar />
       <LinearGradient
-        colors={[activeColor, passiveColor]}
+        colors={
+          props.darkTheme
+            ? [blackColor, activeColor]
+            : [activeColor, passiveColor]
+        }
         style={styles.gradient}
       >
         <Cover {...{ y }} />
         <ScrollView>
-          <HorizontalCalendarList />
+          <HorizontalCalendarList navigation={props.navigation} />
         </ScrollView>
       </LinearGradient>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
+const styles = StyleSheet.create<IStyles>({
+  containerLight: {
+    ...container,
+    backgroundColor: "#fff",
+    paddingBottom: 0
+  },
+  containerDark: {
+    ...container,
+    backgroundColor: blackColor,
+    paddingBottom: 0
   },
   gradient: {
     flex: 1
@@ -59,7 +77,8 @@ const styles = StyleSheet.create({
 const mapState = (state: iRootState) => ({
   step: state.quiz.step,
   specialists: state.quiz.specialists,
-  isReadySpecialists: state.quiz.isReadySpecialists
+  isReadySpecialists: state.quiz.isReadySpecialists,
+  darkTheme: state.theme.darkTheme
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

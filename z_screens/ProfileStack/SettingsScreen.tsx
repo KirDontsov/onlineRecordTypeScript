@@ -8,7 +8,8 @@ import {
   darkColor,
   container,
   activeColor,
-  blackColor
+  blackColor,
+  whiteColor
 } from "../../z_components/ui/Vars";
 import AppText from "../../z_components/ui/AppText";
 import { Switch } from "react-native-paper";
@@ -35,7 +36,6 @@ export interface Styles {
 }
 
 const SettingsScreen = (props: SettingsScreenProps): JSX.Element => {
-  console.log(props);
   return (
     <SafeAreaView
       style={props.darkTheme ? styles.containerDark : styles.containerLight}
@@ -55,6 +55,7 @@ const SettingsScreen = (props: SettingsScreenProps): JSX.Element => {
           onValueChange={() => {
             props.setDarkTheme(!props.darkTheme);
           }}
+          color={activeColor}
         />
       </View>
     </SafeAreaView>

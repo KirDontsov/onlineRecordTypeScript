@@ -6,10 +6,14 @@ import SafeAreaView from "react-native-safe-area-view";
 import LightStatusBar from "../../../z_components/ui/StatusBar";
 import AppTextTitle from "../../../z_components/ui/AppTextTitle";
 import AppText from "../../../z_components/ui/AppText";
-import { container } from "../../../z_components/ui/Vars";
-import { IStyles } from "../../../@types/Interfaces";
-
+import { container, blackColor } from "../../../z_components/ui/Vars";
 import AppButton from "../../../z_components/ui/AppButton";
+interface Styles {
+  containerLight: {};
+  containerDark: {};
+  textLight: {};
+  textDark: {};
+}
 
 interface QuizProps
   extends Partial<ReturnType<typeof mapState>>,
@@ -39,10 +43,23 @@ class RecordScreen extends Component<QuizProps> {
     // const { navigation } = this.props;
 
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={
+          this.props.darkTheme ? styles.containerDark : styles.containerLight
+        }
+      >
         <LightStatusBar />
-        <AppText>Бассейн:</AppText>
-        <AppTextTitle> {this.props.chosenFilial}</AppTextTitle>
+        <AppText
+          style={this.props.darkTheme ? styles.textDark : styles.textLight}
+        >
+          Бассейн:
+        </AppText>
+        <AppTextTitle
+          style={this.props.darkTheme ? styles.textDark : styles.textLight}
+        >
+          {" "}
+          {this.props.chosenFilial}
+        </AppTextTitle>
 
         <AppButton
           title="Выбрать специалиста"
@@ -50,18 +67,41 @@ class RecordScreen extends Component<QuizProps> {
         />
         <AppButton title="Выбрать услугу" onPress={() => this.nextServices()} />
         <AppButton title="Выбрать время" onPress={() => this.nextTime()} />
-        <AppText>Вы выбрали:</AppText>
-        <AppText>{this.props.chosenCity}</AppText>
-        <AppText>{this.props.chosenFilial}</AppText>
-        <AppText>{this.props.chosenSpecialist}</AppText>
-        <AppText>{this.props.date}</AppText>
+        <AppText
+          style={this.props.darkTheme ? styles.textDark : styles.textLight}
+        >
+          Вы выбрали:
+        </AppText>
+        <AppText
+          style={this.props.darkTheme ? styles.textDark : styles.textLight}
+        >
+          {this.props.chosenCity}
+        </AppText>
+        <AppText
+          style={this.props.darkTheme ? styles.textDark : styles.textLight}
+        >
+          {this.props.chosenFilial}
+        </AppText>
+        <AppText
+          style={this.props.darkTheme ? styles.textDark : styles.textLight}
+        >
+          {this.props.chosenSpecialist}
+        </AppText>
+        <AppText
+          style={this.props.darkTheme ? styles.textDark : styles.textLight}
+        >
+          {this.props.date}
+        </AppText>
       </SafeAreaView>
     );
   }
 }
 
-const styles = StyleSheet.create<IStyles>({
-  container: { ...container }
+const styles = StyleSheet.create<Styles>({
+  containerLight: { ...container, backgroundColor: "#fff" },
+  containerDark: { ...container, backgroundColor: blackColor },
+  textLight: { color: blackColor },
+  textDark: { color: "#fff" }
 });
 
 const mapState = (state: iRootState) => ({
@@ -72,7 +112,8 @@ const mapState = (state: iRootState) => ({
   service: state.quiz.service,
   date: state.quiz.date,
   chosenFilial: state.map.chosenFilial,
-  chosenCity: state.city.chosenCity
+  chosenCity: state.city.chosenCity,
+  darkTheme: state.theme.darkTheme
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

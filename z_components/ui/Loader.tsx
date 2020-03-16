@@ -1,25 +1,38 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import { activeColor, container } from "../ui/Vars";
+import {
+  activeColor,
+  container,
+  blackColor,
+  whiteColor,
+  passiveColor
+} from "../ui/Vars";
 import { IStyles } from "../../@types/Interfaces";
+import { iRootState } from "../../store";
+import { connect } from "react-redux";
 
-const Loader = () => (
-  <View style={[styles.container]}>
+interface LoaderProps extends Partial<ReturnType<typeof mapState>> {
+  navigation?: any;
+}
+
+const Loader = (props: LoaderProps) => (
+  <View style={props.darkTheme ? styles.containerDark : styles.containerLight}>
     <ActivityIndicator
-      // style={{
-      //   flex: 1,
-      //   paddingVertical: "50%"
-      // }}
       animating={true}
-      color={activeColor}
+      color={props.darkTheme ? activeColor : passiveColor}
       size={"large"}
     />
   </View>
 );
 
 const styles = StyleSheet.create<IStyles>({
-  container: { ...container }
+  containerLight: { ...container, backgroundColor: whiteColor },
+  containerDark: { ...container, backgroundColor: blackColor }
 });
 
-export default Loader;
+const mapState = (state: iRootState) => ({
+  darkTheme: state.theme.darkTheme
+});
+
+export default connect(mapState as any)(Loader);

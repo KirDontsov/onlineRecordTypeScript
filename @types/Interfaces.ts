@@ -12,9 +12,11 @@ export interface IContainer {
 }
 
 export interface IStyles {
-  container?: {};
+  containerLight: {};
+  containerDark: {};
   gradient?: {};
-  text?: TextStyle;
+  textLight?: TextStyle;
+  textDark?: TextStyle;
 }
 
 export interface IProfile {

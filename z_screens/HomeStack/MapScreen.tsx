@@ -7,7 +7,7 @@ import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 // const polyline = require("@mapbox/polyline");
 import LightStatusBar from "../../z_components/ui/StatusBar";
 import { container } from "../../z_components/ui/Vars";
-import { mapStyle } from "../../Maps";
+import { mapStyleLight, mapStyleDark } from "../../Maps";
 
 interface MapProps
   extends Partial<ReturnType<typeof mapState>>,
@@ -63,7 +63,7 @@ class MapScreen extends Component<MapProps> {
         <LightStatusBar />
         <MapView
           style={styles.mapStyle}
-          customMapStyle={mapStyle}
+          customMapStyle={this.props.darkTheme ? mapStyleDark : mapStyleLight}
           provider={PROVIDER_GOOGLE}
           region={this.state.region}
         >
@@ -122,7 +122,8 @@ const styles = StyleSheet.create<Styles>({
 const mapState = (state: iRootState) => ({
   chosenCity: state.city.chosenCity,
   isReadyMap: state.map.isReadyMap,
-  chosenFilial: state.map.chosenFilial
+  chosenFilial: state.map.chosenFilial,
+  darkTheme: state.theme.darkTheme
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

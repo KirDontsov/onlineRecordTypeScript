@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
-import { blackColor, passiveColor, activeColor, windowWidth } from "./Vars";
+import { blackColor, activeColor, windowWidth } from "./Vars";
 
-const AppButton = props => (
+const AppButton = (props: any) => (
   <View style={styles.container}>
     <TouchableOpacity
       style={{ ...styles.default, ...props.style }}

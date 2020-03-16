@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { IProfile } from "../../../@types/Interfaces";
+import { IProfile, IStyles } from "../../../@types/Interfaces";
 import Loader from "../../../z_components/ui/Loader";
 import Profiles from "../../../z_components/SpecialistsScreen/Profiles";
 import { connect } from "react-redux";
 import { iRootState, Dispatch } from "./../../../store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LightStatusBar from "../../../z_components/ui/StatusBar";
+import { container, blackColor } from "../../../z_components/ui/Vars";
 
 interface ISpecialistScreenProps
   extends Partial<ReturnType<typeof mapState>>,
@@ -62,7 +63,11 @@ class SpecialistScreen extends Component<ISpecialistScreenProps> {
       return <Loader />;
     }
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={
+          this.props.darkTheme ? styles.containerDark : styles.containerLight
+        }
+      >
         <LightStatusBar />
         <Profiles {...{ profiles }} navigation={this.props.navigation} />
       </SafeAreaView>
@@ -70,16 +75,26 @@ class SpecialistScreen extends Component<ISpecialistScreenProps> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
+const styles = StyleSheet.create<IStyles>({
+  containerLight: {
+    ...container,
+    backgroundColor: "#fff",
+    paddingTop: 0,
+    paddingBottom: 0
+  },
+  containerDark: {
+    ...container,
+    backgroundColor: blackColor,
+    paddingTop: 0,
+    paddingBottom: 0
   }
 });
 
 const mapState = (state: iRootState) => ({
   step: state.quiz.step,
   specialists: state.quiz.specialists,
-  isReadySpecialists: state.quiz.isReadySpecialists
+  isReadySpecialists: state.quiz.isReadySpecialists,
+  darkTheme: state.theme.darkTheme
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
